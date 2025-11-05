@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Productividad KOVI</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <h1 class="app-title" id="appTitle">Calculadora de Productividad KOVI</h1>
+      <div class="driver-info" id="driverInfo" style="display: none;">
+        <div class="driver-plate" id="currentPlate">-</div>
+        <div class="driver-label" id="licensePlateLabel">Placa del Vehículo</div>
+      </div>
+      <div class="header-metrics">
+        <div class="header-metric">
+          <span class="header-metric-value" id="daysRemaining">28</span>
+          <span class="header-metric-label">Días Restantes</span>
+        </div>
+        <div class="header-metric">
+          <span class="header-metric-value" id="completionRate">0%</span>
+          <span class="header-metric-label">Tasa Finalización</span>
+        </div>
+        <div class="header-metric">
+          <span class="header-metric-value" id="totalPoints">0</span>
+          <span class="header-metric-label">Puntos Totales</span>
+        </div>
+        <div class="header-metric">
+          <span class="header-metric-value" id="driverLevel">1</span>
+          <span class="header-metric-label">Nivel Conductor</span>
+        </div>
+      </div>
+    </header>
+
+    <div id="alertContainer"></div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label" id="periodGoalLabel">Meta del Periodo (220 viajes)</div>
+        <div class="metric-value" id="periodTrips">0</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="periodProgress" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label" id="weeklyGoalLabel">Meta Semanal (55 viajes)</div>
+        <div class="metric-value" id="weeklyTrips">0</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="weeklyProgress" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Ritmo Semanal Necesario</div>
+        <div class="metric-value" id="weeklyPace">0</div>
+        <div style="font-size: 14px; color: #666; margin-top: 5px;">viajes por día</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Próximo Hito</div>
+        <div class="metric-value" id="nextMilestone">55</div>
+        <div style="font-size: 14px; color: #666; margin-top: 5px;">viajes</div>
+      </div>
+    </div>
+
+    <section class="achievements-section">
+      <h2 class="section-title" id="achievementsTitle">🏆 Logros Desbloqueados</h2>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </section>
+
+    <section class="analytics-section">
+      <h2 class="section-title" id="analyticsTitle">📊 Análisis de Progreso</h2>
+      <div class="analytics-card">
+        <div class="projection-text" id="projectionText">
+          A este ritmo, completarás 0 viajes al final del periodo
+        </div>
+        <div class="export-buttons">
+          <button class="btn-export" id="exportPDF" disabled>📄 Exportar PDF</button>
+          <button class="btn-export" id="exportCSV" disabled>📊 Exportar CSV</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="ranking-section">
+      <h2 class="section-title" id="rankingTitle">🥇 Mi Rendimiento Personal</h2>
+      <table class="ranking-table" id="rankingTable">
+        <thead>
+          <tr>
+            <th>Posición</th>
+            <th>Placa</th>
+            <th>Viajes</th>
+            <th>Puntos</th>
+            <th>Eficiencia</th>
+          </tr>
+        </thead>
+        <tbody id="rankingBody"></tbody>
+      </table>
+    </section>
+
+    <section class="form-section">
+      <h2 class="section-title" id="registerTitle">➕ Registrar Viajes</h2>
+      <form id="tripForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="licensePlate" class="form-label" id="licensePlateFormLabel">Placa del Vehículo</label>
+            <input type="text" id="licensePlate" class="form-input" placeholder="Ej: ABC-123" required style="text-transform: uppercase;">
+          </div>
+          <div class="form-group">
+            <label for="weekNumber" class="form-label">Número de Semana (1-4)</label>
+            <input type="number" id="weekNumber" class="form-input" min="1" max="4" required>
+          </div>
+          <div class="form-group">
+            <label for="tripsCount" class="form-label">Viajes Realizados</label>
+            <input type="number" id="tripsCount" class="form-input" min="0" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Registrar Semana</button>
+      </form>
+    </section>
+
+    <section class="history-section">
+      <h2 class="section-title" id="historyTitle">📋 Historial de Semanas</h2>
+      <div class="history-grid" id="historyGrid"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
